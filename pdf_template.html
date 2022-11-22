@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>report.pdf</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .img {
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Аналитика по зарплатам и городам для профессии {{ name }}</h1>
+    <div class="img"><img src="{{ path }}" alt="graph.png"></div>
+    <h2>Статистика по годам</h2>
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Средняя зарплата</th>
+                <th>Средняя зарплата - {{ name }}</th>
+                <th>Количество вакансий</th>
+                <th>Количество вакансий - {{ name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in statistical_data %}
+                <tr>
+                    <td>{{ data[0] }}</td>
+                    <td>{{ data[1] }}</td>
+                    <td>{{ data[2] }}</td>
+                    <td>{{ data[3] }}</td>
+                    <td>{{ data[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Статистика по городам</h2>
+    <table style="width: 48%; float: left;">
+        <thead>
+            <tr>
+                <th>Город</th>
+                <th>Уровень зарплат</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for city, data in fifth_statistical_data.items() %}
+                <tr>
+                    <td>{{ city }}</td>
+                    <td>{{ data }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table style="width: 48%; float: right;">
+        <thead>
+            <tr>
+                <th>Город</th>
+                <th>Доля вакансий</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for city, data in sixth_statistical_data.items() %}
+                <tr>
+                    <td>{{ city }}</td>
+                    <td>{{ data }}%</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
