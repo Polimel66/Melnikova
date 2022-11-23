@@ -273,7 +273,7 @@ class Report:
         plt.savefig('graph.png')
 
     def generate_pdf(self):
-        environment = Environment(loader=FileSystemLoader('.'))
+        environment = Environment(loader=FileSystemLoader('../../Desktop'))
         temp = environment.get_template("pdf_template.html")
         for key in self.sixth_statistical_data:
             self.sixth_statistical_data[key] = round(self.sixth_statistical_data[key] * 100, 2)
@@ -287,7 +287,9 @@ class Report:
                       'sixth_statistical_data': self.sixth_statistical_data}
         pdf_temp = temp.render(render_dic)
         config = pdfkit.configuration(wkhtmltopdf=r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe')
-        pdfkit.from_string(pdf_temp, 'report.pdf', configuration=config, options={"enable-local-file-access": None})
+        pdfkit.from_string(pdf_temp, '../../Desktop/report.pdf', configuration=config,
+                           options={"enable-local-file-access": None})
 
 
-InputConnect()
+def get_result():
+    InputConnect()
