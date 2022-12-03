@@ -5,11 +5,40 @@ from datetime import datetime
 
 
 class InputConect:
+    """Отвечает за обработку параметров вводимых пользователем: фильтры, сортировка, диапазон вывода, требуемые столбцы,
+     а также за печать таблицы на экран.
+
+     Attributes:
+         file_name (str): Имя файла
+         filtering_parameter (str): Параметр фильтрации
+         sorting_parameter (str): Параметр сортировки
+         is_reverse_sort_order (bool): булевая переменная определяющая порядок сортировки (обратный или нет)
+         output_range (list): диапазон вывода
+         required_columns (list): требуемые столбцы
+    """
+
     def __init__(self):
+        """Инициализирует объект InputConect
+
+        Args:
+            file_name (str): Имя файла
+            filtering_parameter (str): Параметр фильтрации
+            sorting_parameter (str): Параметр сортировки
+            is_reverse_sort_order (bool): булевая переменная определяющая порядок сортировки (обратный или нет)
+            required_columns (list): требуемые столбцы
+        """
         self.file_name, self.filtering_parameter, self.sorting_parameter, self.is_reverse_sort_order, self.output_range, self.required_columns = InputConect.entering_requests()
 
     @staticmethod
     def sort_experience(vacancy):
+        """Отвечает за сортировку по параметру Опыт работы. Это метод будет использован как аргумент для Sort.
+
+        Args:
+            vacancy (Vacancy): Объект класса Vacancy, содержащий информацию о вакансии
+
+        Returns:
+            int: возвращает цифру равную максимальному числу лет, которое нужно отработать
+        """
         experience = vacancy.experience_id
         if experience == 'noExperience':
             return 0
@@ -21,6 +50,12 @@ class InputConect:
 
     @staticmethod
     def entering_requests():
+        """Отвечает за ввод запросов пользователя
+
+        Returns:
+            tuple: коллекция, содержащая параметры введенные пользователем (имя файла, параметр сортировки,
+             параметр фильтрации, порядок сортировки, диапазон вывода и требуемые столбцы)
+        """
         print('Введите название файла:', end=' ')
         name_file = input()
         print('Введите параметр фильтрации:', end=' ')
@@ -62,6 +97,15 @@ class InputConect:
 
     @staticmethod
     def print_table(vacancies, output_range, required_columns):
+        """Отвечает за формирование и печать таблицы
+
+        Args:
+            vacancies (list): Список словарей, содержащих информацию о вакансиях (столбец - значение)
+            output_range (list): Диапазон вывода таблицы
+            required_columns (list): Требуемые для вывода столбцы
+
+        Никаких значений не возвращает, но печатает таблицу в консоль
+        """
         table = PrettyTable(hrules=ALL, align='l')
         flag = True
         counter = 0
@@ -93,6 +137,14 @@ class InputConect:
 
     @staticmethod
     def trim_line(vacancy):
+        """Обрезает информацию, которая длиннее 100 символов
+
+        Args:
+            vacancy (dict): словарь содержащий информацию о вакансии
+
+        Returns:
+            dict: словарь с информацией обрезанной до 100 символов
+        """
         resultVacancy = {}
         for key, val in vacancy.items():
             if len(str(val)) > 100:
@@ -101,6 +153,11 @@ class InputConect:
         return resultVacancy
 
     def data_processing(self, vacancies):
+        """Обрабатывает данные (вызывает методы сортировки, фильтрации и форматирования)
+
+        Args:
+            vacancies (list): список объектов Vacancy, содержащих информацию о вакансиях
+        """
         dic_sorting = {'Навыки': lambda vacancy: len(vacancy.key_skills.split('\n')),
                        'Оклад': lambda vacancy: (float(vacancy.salary.salary_from) * currency_to_rub[
                            vacancy.salary.salary_currency] + float(
@@ -159,6 +216,15 @@ class InputConect:
 
     @staticmethod
     def formatter(vacancies, funcs):
+        """Форматирует информацию (переводит на русский, вызывает методы форматирования даты и зарплаты)
+
+        Args:
+            vacancies (list): список объектов Vacancy, содержащих информацию о вакансиях
+            funcs (dict): словарь функций, с помощью которого форматируется информация
+
+        Returns:
+            list: список словарей, содержащих отформатированную информацию о вакансиях
+        """
         result = []
         for vacancy in vacancies:
             res = {'Название': vacancy.name,
@@ -182,6 +248,14 @@ class InputConect:
 
     @staticmethod
     def salary_formation(salary):
+        """Форматирует зарплату, формирует строку для столбца Оклад
+
+        Args:
+            salary (Salary): Объект класса Salary, содержащий информацию о зарплате
+
+        Returns:
+            str: Сформированная строка оклада для таблицы
+        """
         currency_dictionary = {'AZN': 'Манаты', 'BYR': 'Белорусские рубли', 'EUR': 'Евро',
                                'GEL': 'Грузинский лари', 'KGS': 'Киргизский сом', 'KZT': 'Тенге',
                                'RUR': 'Рубли', 'UAH': 'Гривны', 'USD': 'Доллары',
@@ -197,6 +271,16 @@ class InputConect:
 
     @staticmethod
     def check_occurrence_skills(sample: str, vacancy):
+        """Метод для фильтрации по навыкам, проверяет вхождение всех навыков из параметра фильтрации
+         в полный список навыков вакансии
+
+        Args:
+            sample (str): Навыки из параметра, которые должны входить в нужную нам вакансию
+            vacancy (Vacancy): вакансия которая проверяется фильтром
+
+        Returns:
+            bool: True - вакансия подходит, False - вакансия не прошла фильтр
+        """
         if ', ' in sample:
             sampleList = sample.split(', ')
         else:
@@ -209,6 +293,17 @@ class InputConect:
 
     @staticmethod
     def make_filtering(vacancies: list, parameter, filter_dictionary, rus_to_eng):
+        """Отвечает за осуществление фильтрации
+
+        Args:
+            vacancies (list): Список объектов Vacancy, содержащих информацию о вакансиях
+            parameter (list): Список содержащий параметр фильтрации
+            filter_dictionary (dict): Словарь функций для фильтрации по каждому из столбцов
+            rus_to_eng (dict): Словарь перевода информации на русский язык
+
+        Returns:
+            list: Отфильтрованный список вакансий (объектов класса Vacancy)
+        """
         res_vacancies = []
         parameter = parameter.split(': ')
         for vacancy in vacancies:
@@ -224,6 +319,17 @@ class InputConect:
 
     @staticmethod
     def make_sort(vacancies: list, parameter, is_reverse, dic_sorting):
+        """Сортирует вакансии
+
+        Args:
+            vacancies (list): Список объектов Vacancy, содержащих информацию о вакансиях
+            parameter (str): Параметр сортировки
+            is_reverse (bool): Порядок сортировки
+            dic_sorting (dict): Словарь функций для сортировки
+
+        Returns:
+            list: Отсортированные список вакансий (объектов класса Vacancy)
+        """
         if parameter in dic_sorting.keys():
             vacancies.sort(key=dic_sorting[parameter], reverse=is_reverse)
         else:
@@ -233,8 +339,35 @@ class InputConect:
 
 
 class Vacancy:
+    """Класс для представления вакансии
+
+    Attributes:
+        name (str): Название вакансии
+        description (str): Описание вакансии
+        key_skills (str): Навыки
+        experience_id (str): Опыт работы
+        premium (str): Премиум-вакансия
+        employer_name (str): Компания
+        salary (Salary): объект класса Salary, содержащий в себе всю информацию о зарплате
+        area_name (str): Название региона
+        published_at (str): Дата и время публикации вакансии
+    """
+
     def __init__(self, name, description, key_skills, experience_id, premium, employer_name, salary, area_name,
                  published_at):
+        """Инициализирует объект Vacancy
+
+        Args:
+            name (str): Название вакансии
+            description (str): Описание вакансии
+            key_skills (str): Навыки
+            experience_id (str): Опыт работы
+            premium (str): Премиум-вакансия
+            employer_name (str): Компания
+            salary (Salary): объект класса Salary, содержащий в себе всю информацию о зарплате
+            area_name (str): Название региона
+            published_at (str): Дата и время публикации вакансии
+        """
         self.name = name
         self.description = description
         self.key_skills = key_skills
@@ -247,7 +380,24 @@ class Vacancy:
 
 
 class Salary:
+    """Класс для представления зарплаты
+
+    Attributes:
+        salary_from (str): Нижняя граница зарплаты
+        salary_to (str): Верхняя граница зарплаты
+        salary_gross (str): Оклад указан до вычета налогов
+        salary_currency (str): Идентификатор валюты оклада
+    """
+
     def __init__(self, salary_from, salary_to, salary_gross, salary_currency):
+        """Инициализирует объект Vacancy
+
+        Args:
+            salary_from (str): Нижняя граница зарплаты
+            salary_to (str): Верхняя граница зарплаты
+            salary_gross (str): Оклад указан до вычета налогов
+            salary_currency (str): Идентификатор валюты оклада
+        """
         self.salary_from = salary_from
         self.salary_to = salary_to
         self.salary_gross = salary_gross
@@ -255,12 +405,32 @@ class Salary:
 
 
 class DataSet:
+    """Отвечает за чтение и подготовку данных из CSV-файла
+
+    Attributes:
+        file_name (str): Имя файла
+        vacancies_objects (list): список объектов класса Vacancy, содержащих в себе информацию из файла после парсинга
+    """
+
     def __init__(self, file_name):
+        """Инициализирует объект DataSet, звпускает работу остальных методов для заполнения vacancies_objects
+
+        Args:
+            file_name (str): Имя файла
+        """
         self.file_name = file_name
         self.vacancies_objects = DataSet.csv_filer(file_name)
 
     @staticmethod
     def csv_reader(name_file):
+        """Отвечает за открывание и считывание csv файла
+
+        Args:
+            name_file (str): Имя файла
+
+        Returns:
+            tuple: Коллекция из двух элементов: первый - список заголовков, второй - список строк информации из файла
+        """
         file = open(name_file, encoding='utf_8_sig')
         reader = csv.reader(file)
         data = []
@@ -276,6 +446,15 @@ class DataSet:
 
     @staticmethod
     def csv_filer(name_file):
+        """Отвечает за "чистку" считанной информации: убирает html теги, лишние пробелы.
+        Формирует из полученной информации объекты класса Vacancy
+
+        Args:
+            name_file(str): Имя файла
+
+        Returns:
+            list: список объектов класса Vacancy, содержащих в себе информацию из файла после парсинга
+        """
         headings, informations = DataSet.csv_reader(name_file)
         vacancies_objects = []
         for inf in informations:
@@ -296,9 +475,12 @@ class DataSet:
 
 
 def get_result():
+    """Запускает программу
+    """
     input_inf = InputConect()
     data_Set = DataSet(input_inf.file_name)
     input_inf.data_processing(data_Set.vacancies_objects)
+
 
 # get_result()
 
