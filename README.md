@@ -11,3 +11,9 @@
 Замер без многопроцессорной обработки
 
 ![без многпроцесс](https://user-images.githubusercontent.com/57943773/206781528-e305df74-5a40-4081-85ee-9562892d8483.png)
+
+ - Задача 3.2.3
+
+Замер с многопроцессорной обработкой при помощи Concurrent futures. Выполняется быстрее, выбираем это решение.
+
+![Concurrent futures](https://user-images.githubusercontent.com/57943773/206786858-ef14acfd-c25d-474b-bce3-f957ccaf0896.png)
