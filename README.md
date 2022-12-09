@@ -16,4 +16,4 @@
 
 Замер с многопроцессорной обработкой при помощи Concurrent futures. Выполняется быстрее, выбираем это решение.
 
-![Concurrent futures](https://user-images.githubusercontent.com/57943773/206786858-ef14acfd-c25d-474b-bce3-f957ccaf0896.png)
+![замер Concurrent futures](https://user-images.githubusercontent.com/57943773/206787295-6627b042-e787-4bd6-9389-93b46df6ad08.png)
