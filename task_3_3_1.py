@@ -33,5 +33,5 @@ for i in range(0, len(all_months)):
     KZT = make_loc('KZT')
     USD = make_loc('USD')
     second_data.loc[i] = [f'{all_months[i][3:]}-{all_months[i][:2]}', BYR, EUR, KZT, UAH, USD]
-second_data.to_csv('currencies.csv')
+second_data.to_csv('csv_3_3_1.csv')
 print(second_data.head())
