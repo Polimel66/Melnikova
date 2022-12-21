@@ -22,6 +22,6 @@
 
 ![3 3 1](https://user-images.githubusercontent.com/57943773/208959776-58884f39-eb0f-452e-9684-510cbb7766ae.png)
 
- - Задача 3.3.2
+ - Задача 3.3.2 (вывод в консоль, файл есть в репозитории)
 
 ![3_3_2](https://user-images.githubusercontent.com/57943773/208975193-75211971-60dc-4793-aa78-57375243ad87.png)
