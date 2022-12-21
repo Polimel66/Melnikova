@@ -25,3 +25,7 @@
  - Задача 3.3.2 (вывод в консоль, файл есть в репозитории)
 
 ![3_3_2](https://user-images.githubusercontent.com/57943773/208975193-75211971-60dc-4793-aa78-57375243ad87.png)
+
+ - Задача 3.3.3
+
+![3_3_3](https://user-images.githubusercontent.com/57943773/208978174-aded4f4c-1d37-47ab-9728-ff99d78d967d.png)
