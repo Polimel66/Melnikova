@@ -7,7 +7,7 @@ import numpy as np
 from jinja2 import Environment, FileSystemLoader
 import pdfkit
 
-dataframe_published_at = pd.read_csv("../csv_3_3_1.csv")
+dataframe_published_at = pd.read_csv("csv_3_3_1.csv")
 
 
 def begin_processes(args):
