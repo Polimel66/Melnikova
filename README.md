@@ -34,3 +34,6 @@
 
 ![3_5_2](https://user-images.githubusercontent.com/57943773/210003218-0256bb98-820e-4737-8941-85b11227631b.png)
 
+ - Задача 3.5.3
+
+![task_3_5_3](https://user-images.githubusercontent.com/57943773/210006297-99b8ab94-07f0-4e08-b867-bebd0358a3b7.png)
