@@ -29,3 +29,11 @@
  - Задача 3.3.3 (файл есть в репозитории)
 
 ![3_3_3](https://user-images.githubusercontent.com/57943773/208978174-aded4f4c-1d37-47ab-9728-ff99d78d967d.png)
+
+ - Задача 3.5.2
+
+![task_3_5_2](https://user-images.githubusercontent.com/57943773/210006787-e6d26871-e961-4fe5-ba80-2df066902afe.png)
+
+ - Задача 3.5.3
+
+![task_3_5_3](https://user-images.githubusercontent.com/57943773/210006297-99b8ab94-07f0-4e08-b867-bebd0358a3b7.png)
