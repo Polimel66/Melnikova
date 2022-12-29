@@ -32,7 +32,7 @@
 
  - Задача 3.5.2
 
-![3_5_2](https://user-images.githubusercontent.com/57943773/210003218-0256bb98-820e-4737-8941-85b11227631b.png)
+![task_3_5_2](https://user-images.githubusercontent.com/57943773/210006787-e6d26871-e961-4fe5-ba80-2df066902afe.png)
 
  - Задача 3.5.3
 
