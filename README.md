@@ -32,6 +32,5 @@
 
  - Задача 3.5.2
 
-![task_3_5_2](https://user-images.githubusercontent.com/57943773/209997435-cc43bd69-819b-4d6e-8581-47a112ba9fac.png)
-
+![3_5_2](https://user-images.githubusercontent.com/57943773/210003218-0256bb98-820e-4737-8941-85b11227631b.png)
 
